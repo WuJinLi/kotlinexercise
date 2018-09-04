@@ -9,7 +9,7 @@ import android.util.Log
 /**
  * author: WuJinLi
  * time  : 2018/9/4
- * desc  :
+ * desc  : 解决使用BottomNavigationView item大于三个出item的隐藏的问题
  */
 class BottomNavigationViewHelper {
 
