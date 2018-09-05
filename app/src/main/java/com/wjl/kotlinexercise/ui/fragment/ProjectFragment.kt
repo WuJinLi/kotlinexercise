@@ -1,5 +1,6 @@
 package com.wjl.kotlinexercise.ui.fragment
 
+import com.wjl.kotlinexercise.R
 import com.wjl.kotlinexercise.base.BaseFragment
 
 /**
@@ -8,11 +9,14 @@ import com.wjl.kotlinexercise.base.BaseFragment
  * desc  : 项目fragment
  */
 class ProjectFragment : BaseFragment() {
+    companion object {
+        fun getInstance(): ProjectFragment = ProjectFragment()
+    }
+
     override fun attachLayoutRes(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return R.layout.fg_project
     }
 
     override fun initView() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

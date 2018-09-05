@@ -1,6 +1,7 @@
 package com.wjl.kotlinexercise.ui.fragment
 
 import android.support.v4.app.Fragment
+import com.wjl.kotlinexercise.R
 import com.wjl.kotlinexercise.base.BaseFragment
 
 /**
@@ -9,11 +10,14 @@ import com.wjl.kotlinexercise.base.BaseFragment
  * desc  : 首页fragment
  */
 class HomeFragment : BaseFragment() {
+    companion object {
+        fun getInstance():HomeFragment=HomeFragment()
+    }
+
     override fun attachLayoutRes(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return R.layout.fg_home
     }
 
     override fun initView() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
