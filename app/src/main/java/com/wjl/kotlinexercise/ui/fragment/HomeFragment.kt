@@ -1,8 +1,11 @@
 package com.wjl.kotlinexercise.ui.fragment
 
+import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.wjl.kotlinexercise.R
 import com.wjl.kotlinexercise.base.BaseFragment
+import com.wjl.kotlinexercise.http.RetrofitClient
+import io.reactivex.Scheduler
 
 /**
  * author: WuJinLi
@@ -19,5 +22,11 @@ class HomeFragment : BaseFragment() {
     }
 
     override fun initView() {
+
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
     }
 }

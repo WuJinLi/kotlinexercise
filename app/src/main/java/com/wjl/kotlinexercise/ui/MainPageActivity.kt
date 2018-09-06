@@ -139,4 +139,13 @@ class MainPageActivity : BaseActivity() {
         mNavigationFragment?.let { transaction.hide(it) }
         mProjectFragment?.let { transaction.hide(it) }
     }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mHomeFragment=null
+        mKnowledgeTreeFragment=null
+        mNavigationFragment=null
+        mProjectFragment=null
+    }
 }
