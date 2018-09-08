@@ -1,107 +1,86 @@
 package com.wjl.kotlinexercise.http
 
-import com.wjl.kotlinexercise.api.ApiService
-import com.wjl.kotlinexercise.app.App
-import com.wjl.kotlinexercise.constant.Constant
-import com.wjl.kotlinexercise.utils.NetWorkUtil
-import okhttp3.Cache
-import okhttp3.CacheControl
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
+import android.content.Context
+import android.util.Log
 import java.io.File
+import okhttp3.Cache
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import com.wjl.kotlinexercise.Constant
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.Retrofit
+import okhttp3.logging.HttpLoggingInterceptor
+import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
 
 /**
- * @author: wjl
- * @date:2018/9/6
+ * author: WuJinLi
+ * time  : 2018/9/7
+ * desc  :
  */
-object RetrofitClient {
-    private var retrofit: Retrofit? = null
+class RetrofitClient private constructor(context: Context) {
+    var httpCacheDirectory: File? = null
+    val mContext: Context = context
+    var cache: Cache? = null
+    var okHttpClient: OkHttpClient? = null
+    var retrofit: Retrofit? = null
+    val DEFAULT_TIMEOUT: Long = 20
+    var url = Constant.BASE_URL;
 
+    init {
+        //缓存地址
+        if (httpCacheDirectory == null) {
+            httpCacheDirectory = File(mContext.cacheDir, "app_cache")
+        }
+        try {
+            if (cache == null) {
+                cache = Cache(httpCacheDirectory, 10 * 1024 * 1024)
+            }
+        } catch (e: Exception) {
+            Log.e("OKHttp", "Could not create http cache", e)
+        }
+        //okhttp创建了
+        okHttpClient = OkHttpClient.Builder()
+                .addNetworkInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                .cache(cache)
+                .addInterceptor(CacheInterceptor(context))
+                .addNetworkInterceptor(CacheInterceptor(context))
+                .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+                .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+                .build()
+        //retrofit创建了
+        retrofit = Retrofit.Builder()
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .baseUrl(url)
+                .build()
 
-    val service: ApiService by lazy { getRerofit()!!.create(ApiService::class.java) }
+    }
 
+    companion object {
+        @Volatile
+        var instance: RetrofitClient? = null
 
-    private fun getRerofit(): Retrofit? {
-        if (retrofit == null) {
-            synchronized(RetrofitClient::class.java) {
-                if (retrofit == null) {
-                    retrofit = Retrofit.Builder()
-                            .baseUrl(Constant.BASE_URL)
-                            .client(getOkHttpClient())
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                            .build()
-
+        fun getInstance(context: Context): RetrofitClient {
+            if (instance == null) {
+                synchronized(RetrofitClient::class) {
+                    if (instance == null) {
+                        instance = RetrofitClient(context)
+                    }
                 }
             }
+            return instance!!
         }
 
-        return retrofit
+
+    }
+
+    fun <T> create(service: Class<T>?): T? {
+        if (service == null) {
+            throw RuntimeException("Api service is null!")
+        }
+        return retrofit?.create(service)
     }
 
 
-    private fun getOkHttpClient(): OkHttpClient {
-        var builder = OkHttpClient().newBuilder()
-
-        //日志拦截器
-        var httpLoggingInterceptor = HttpLoggingInterceptor()
-        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-
-
-        //设置缓存大小,缓存文件的位置
-        var cacheFile = File(App.context.cacheDir, "cache")
-        var cache = Cache(cacheFile, 1024 * 1024 * 50)
-        builder.run {
-            addInterceptor(httpLoggingInterceptor)
-            addInterceptor(addHttpInterceptor())
-            addInterceptor(addCacheInterceptor())
-            cache(cache)  //添加缓存
-            connectTimeout(HttpConstant.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
-            readTimeout(HttpConstant.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
-            writeTimeout(HttpConstant.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
-            retryOnConnectionFailure(true) // 错误重连
-        }
-        return builder.build()
-    }
-
-    private fun addHttpInterceptor(): Interceptor {
-        return Interceptor { chain ->
-            val builder = chain.request().newBuilder()
-            val request = builder.addHeader("Content-type", "application/json; charset=utf-8").build()
-            chain.proceed(request)
-        }
-    }
-
-    private fun addCacheInterceptor(): Interceptor {
-        return Interceptor { chain ->
-            var request = chain.request()
-            if (!NetWorkUtil.isNetworkAvailable(App.context)) {
-                request = request.newBuilder()
-                        .cacheControl(CacheControl.FORCE_CACHE)
-                        .build()
-            }
-            val response = chain.proceed(request)
-            if (NetWorkUtil.isNetworkAvailable(App.context)) {
-                val maxAge = 0
-                // 有网络时 设置缓存超时时间0个小时 ,意思就是不读取缓存数据,只对get有用,post没有缓冲
-                response.newBuilder()
-                        .header("Cache-Control", "public, max-age=" + maxAge)
-                        .removeHeader("Retrofit")// 清除头信息，因为服务器如果不支持，会返回一些干扰信息，不清除下面无法生效
-                        .build()
-            } else {
-                // 无网络时，设置超时为4周  只对get有用,post没有缓冲
-                val maxStale = 60 * 60 * 24 * 28
-                response.newBuilder()
-                        .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
-                        .removeHeader("nyn")
-                        .build()
-            }
-            response
-        }
-    }
 }
