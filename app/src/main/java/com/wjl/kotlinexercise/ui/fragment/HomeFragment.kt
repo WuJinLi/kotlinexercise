@@ -43,8 +43,6 @@ class HomeFragment : BaseFragment(), HomeContract.View {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        tv_info.setOnClickListener(View.OnClickListener {
-            mPresenter.getHomeData()
-        })
+        mPresenter.getHomeData()
     }
 }

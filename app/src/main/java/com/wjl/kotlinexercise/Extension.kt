@@ -1,4 +1,4 @@
-package com.tt.lvruheng.eyepetizer.utils
+package com.wjl.kotlinexercise
 
 import android.app.Activity
 import android.content.Context
