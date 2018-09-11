@@ -12,11 +12,13 @@ import com.wjl.kotlinexercise.mvp.view.IBaseView
  */
 class HomeContract {
     interface View : IBaseView<Presenter> {
-        fun setData(bean: Banner)
+        fun setData(bean: List<Banner>)
         fun setHomeData(bean:HomeBean)
     }
 
     interface Presenter : IBasePresenter {
         fun getHomeData()
+        fun getBannerData()
     }
+
 }

@@ -6,7 +6,7 @@ package com.wjl.kotlinexercise.mvp.model
  * desc  :
  */
 
-
+data class BannerList(val data:List<Banner>)
 data class Banner(val desc: String, val id: Int, val imagePath: String, val isVisible: Int, val order: Int, val title: String, val type: Int, val url: String)
 
 
