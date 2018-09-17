@@ -14,10 +14,10 @@ import android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE
  * Describe : 上滑加载更多操作辅助类
  */
 
-class SwipeToLoadHelper(recyclerView: RecyclerView, private val mAdapterWrapper: AdapterWrapper) : RecyclerView.OnScrollListener() {
+class SwipeToLoadHelper(recyclerView: RecyclerView, adapterWrapper: AdapterWrapper) : RecyclerView.OnScrollListener() {
 
-    private val mRecyclerView: RecyclerView? = null
-    private val mLayoutManager: RecyclerView.LayoutManager
+    private var mRecyclerView: RecyclerView? = null
+    private var mLayoutManager: RecyclerView.LayoutManager?=null
     private var mListener: LoadMoreListener? = null
     /**
      * 是否正在加载中
@@ -27,31 +27,34 @@ class SwipeToLoadHelper(recyclerView: RecyclerView, private val mAdapterWrapper:
      * 上拉刷新功能是否开启
      */
     private var mIsSwipeToLoadEnabled = true
+    private var mAdapterWrapper:AdapterWrapper?=null
 
     init {
-        mLayoutManager = recyclerView.layoutManager
+        mRecyclerView=recyclerView
+        mAdapterWrapper=adapterWrapper
+        mLayoutManager = mRecyclerView!!.layoutManager
 
         if (mLayoutManager is GridLayoutManager) {
-            mAdapterWrapper.setAdapterType(AdapterWrapper.ADAPTER_TYPE_GRID)
-            mAdapterWrapper.setSpanCount(mLayoutManager.spanCount)
+            mAdapterWrapper!!.setAdapterType(AdapterWrapper.ADAPTER_TYPE_GRID)
+            mAdapterWrapper!!.setSpanCount((mLayoutManager as GridLayoutManager).spanCount)
         } else if (mLayoutManager is LinearLayoutManager) {
-            mAdapterWrapper.setAdapterType(AdapterWrapper.ADAPTER_TYPE_LINEAR)
+            mAdapterWrapper!!.setAdapterType(AdapterWrapper.ADAPTER_TYPE_LINEAR)
         }
 
         // 将OnScrollListener设置RecyclerView
-        recyclerView.addOnScrollListener(this)
+        mRecyclerView!!.addOnScrollListener(this)
     }
 
     override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
         if (mIsSwipeToLoadEnabled && SCROLL_STATE_IDLE == newState && !mLoading) {
             if (mLayoutManager is GridLayoutManager) {
-                val gridLayoutManager = mLayoutManager
+                val gridLayoutManager = mLayoutManager as GridLayoutManager
                 gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                     override fun getSpanSize(position: Int): Int {
                         return if (mIsSwipeToLoadEnabled) {
                             // 功能开启, 根据位置判断, 最后一个item时返回整个宽度, 其他位置返回1
                             // AdapterWrapper会保证最后一个item会从新的一行开始
-                            if (position == mLayoutManager.getItemCount() - 1) {
+                            if (position == mLayoutManager!!.getItemCount() - 1) {
                                 gridLayoutManager.spanCount
                             } else {
                                 1
@@ -64,10 +67,10 @@ class SwipeToLoadHelper(recyclerView: RecyclerView, private val mAdapterWrapper:
             }
 
             if (mLayoutManager is LinearLayoutManager) {
-                val linearLayoutManager = mLayoutManager
+                val linearLayoutManager = mLayoutManager as LinearLayoutManager
                 val lastCompletePosition = linearLayoutManager.findLastCompletelyVisibleItemPosition()
                 // only when the complete visible item is second last
-                if (lastCompletePosition == mLayoutManager.getItemCount() - 2) {
+                if (lastCompletePosition == mLayoutManager!!.getItemCount() - 2) {
                     val firstCompletePosition = linearLayoutManager.findFirstCompletelyVisibleItemPosition()
                     val child = linearLayoutManager.findViewByPosition(lastCompletePosition)
                             ?: return
@@ -75,10 +78,10 @@ class SwipeToLoadHelper(recyclerView: RecyclerView, private val mAdapterWrapper:
                     if (deltaY > 0 && firstCompletePosition != 0) {
                         recyclerView.smoothScrollBy(0, -deltaY)
                     }
-                } else if (lastCompletePosition == mLayoutManager.getItemCount() - 1) {
+                } else if (lastCompletePosition == mLayoutManager!!.getItemCount() - 1) {
                     // 最后一项完全显示, 触发操作, 执行加载更多操作 禁用回弹判断
                     mLoading = true
-                    mAdapterWrapper.setLoadItemState(true)
+                    mAdapterWrapper!!.setLoadItemState(true)
                     if (mListener != null) {
                         mListener!!.onLoad()
                     }
@@ -97,7 +100,7 @@ class SwipeToLoadHelper(recyclerView: RecyclerView, private val mAdapterWrapper:
     fun setSwipeToLoadEnabled(isSwipeToLoadEnabled: Boolean) {
         if (mIsSwipeToLoadEnabled != isSwipeToLoadEnabled) {
             mIsSwipeToLoadEnabled = isSwipeToLoadEnabled
-            mAdapterWrapper.setLoadItemVisibility(isSwipeToLoadEnabled)
+            mAdapterWrapper!!.setLoadItemVisibility(isSwipeToLoadEnabled)
         }
     }
 
@@ -106,7 +109,7 @@ class SwipeToLoadHelper(recyclerView: RecyclerView, private val mAdapterWrapper:
      */
     fun setLoadMoreFinish() {
         mLoading = false
-        mAdapterWrapper.setLoadItemState(false)
+        mAdapterWrapper!!.setLoadItemState(false)
     }
 
     /**
