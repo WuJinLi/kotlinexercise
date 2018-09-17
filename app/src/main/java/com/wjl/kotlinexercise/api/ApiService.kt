@@ -2,10 +2,13 @@ package com.wjl.kotlinexercise.api
 
 import com.wjl.kotlinexercise.mvp.model.ArticleResponse
 import com.wjl.kotlinexercise.mvp.model.BannerList
+import com.wjl.kotlinexercise.mvp.model.HomeBean
+import com.wjl.kotlinexercise.refresh.GankBeanList
 import com.wjl.kotlinexercise.mvp.model.HttpResult
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Url
 
 /**
  * @author: wjl
@@ -17,6 +20,7 @@ interface ApiService {
     /**
      * 轮播图
      */
+    //http://www.wanandroid.com/
     @GET("banner/json")
     fun getBannerData(): Observable<BannerList>
 
@@ -26,4 +30,8 @@ interface ApiService {
      */
     @GET("article/list/{pageNum}/json")
     fun getArticle(@Path("pageNum") pageNum: Int): Observable<HttpResult<ArticleResponse>>
+
+
+    @GET()
+    fun requestData(@Url() url: String): Observable<GankBeanList>
 }

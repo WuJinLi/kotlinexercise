@@ -1,7 +1,11 @@
 package com.wjl.kotlinexercise.ui.fragment
 
+import android.content.Intent
+import android.view.View
 import com.wjl.kotlinexercise.R
 import com.wjl.kotlinexercise.base.BaseFragment
+import com.wjl.kotlinexercise.refresh.RefreshActivity
+import kotlinx.android.synthetic.main.fg_know_ledge_tree.*
 
 /**
  * author: WuJinLi
@@ -10,7 +14,7 @@ import com.wjl.kotlinexercise.base.BaseFragment
  */
 class KnowledgeTreeFragment : BaseFragment() {
     companion object {
-        fun getInstance():KnowledgeTreeFragment= KnowledgeTreeFragment()
+        fun getInstance(): KnowledgeTreeFragment = KnowledgeTreeFragment()
     }
 
     override fun attachLayoutRes(): Int {
@@ -18,5 +22,11 @@ class KnowledgeTreeFragment : BaseFragment() {
     }
 
     override fun initView() {
+        tv_know.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                startActivity(Intent(context, RefreshActivity::class.java))
+            }
+
+        })
     }
 }

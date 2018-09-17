@@ -3,7 +3,8 @@
     package="com.wjl.kotlinexercise">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,11 +17,13 @@
         </activity>
 
 
-        <activity android:name=".DetailActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".DetailActivity"
+            android:screenOrientation="portrait" />
 
 
-        <activity android:name=".ui.MainPageActivity"
+        <activity
+            android:name=".ui.MainPageActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,8 +31,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".refresh.RefreshActivity"
+            android:screenOrientation="portrait"></activity>
 
-        <activity android:name=".ui.WebViewDetailActivity"/>
+        <activity android:name=".ui.WebViewDetailActivity" />
+
+        <!--<activity android:name=".refresh.RefreshActivity"/>-->
 
     </application>
 

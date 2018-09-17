@@ -1,9 +1,11 @@
 package com.wjl.kotlinexercise.ui
 
+import android.content.Intent
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.FragmentTransaction
 import com.wjl.kotlinexercise.R
 import com.wjl.kotlinexercise.base.BaseActivity
+import com.wjl.kotlinexercise.refresh.RefreshActivity
 import com.wjl.kotlinexercise.ui.fragment.HomeFragment
 import com.wjl.kotlinexercise.ui.fragment.KnowledgeTreeFragment
 import com.wjl.kotlinexercise.ui.fragment.NavigationFragment

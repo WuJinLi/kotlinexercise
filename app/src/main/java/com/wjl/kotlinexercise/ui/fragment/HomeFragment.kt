@@ -95,6 +95,7 @@ class HomeFragment : BaseFragment(), HomeContract.View {
         mPresenter.getBannerData()
         mPresenter.getArticles(0)
 
+//        mPresenter.getBannerData()
     }
 
 
