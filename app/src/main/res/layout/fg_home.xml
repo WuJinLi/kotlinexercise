@@ -1,23 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <cn.bingoogolapple.bgabanner.BGABanner
-        android:id="@+id/br_banner"
-        android:layout_width="match_parent"
-        android:layout_height="230dp"
-        app:banner_indicatorGravity="bottom|right"
-        app:banner_placeholderDrawable="@drawable/placeholder_banner"
-        app:banner_tipTextColor="#CCFFFFFF"
-        app:banner_tipTextSize="16sp"
-        app:banner_transitionEffect="alpha" />
-
+    >
     <ListView
         android:id="@+id/lv_listview"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-</LinearLayout>
+        android:layout_height="match_parent"
+         />
+</android.support.v4.widget.SwipeRefreshLayout>

@@ -1,6 +1,7 @@
 package com.wjl.kotlinexercise.adapter
 
 import android.content.Context
+import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -8,22 +9,22 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.wjl.kotlinexercise.R
-import com.wjl.kotlinexercise.mvp.model.Banner
+import com.wjl.kotlinexercise.mvp.model.Article
 
 /**
  * @author: wjl
  * @date:2018/9/2
  */
-class BannerListAdapter(val context: Context) : BaseAdapter() {
+class ArticlesAdapter(val context: Context) : BaseAdapter() {
 
-    var itemList: List<Banner> = ArrayList()
+    var itemList: List<Article> = ArrayList()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
 
-    fun addData(itemList: List<Banner>) {
+    fun addData(itemList: List<Article>) {
         this.itemList = itemList
         notifyDataSetChanged()
     }
@@ -40,8 +41,14 @@ class BannerListAdapter(val context: Context) : BaseAdapter() {
             view = p1
             viewHolder = view.tag as ViewHolder
         }
-        Glide.with(context).load(itemList.get(p0).imagePath).into(viewHolder.iv_background)
-        viewHolder.tv_desc.text = itemList.get(p0).title
+        var article = itemList.get(p0)
+
+        if (!TextUtils.isEmpty(article.envelopePic)) {
+            Glide.with(context).load(article.envelopePic).into(viewHolder.iv_background)
+        }
+
+        viewHolder.tv_desc.text = article.desc
+        viewHolder.tv_author.text = article.author
         return view
     }
 
@@ -61,5 +68,6 @@ class BannerListAdapter(val context: Context) : BaseAdapter() {
     class ViewHolder(var view: View) {
         var iv_background: ImageView = view.findViewById(R.id.iv_background) as ImageView
         var tv_desc: TextView = view.findViewById(R.id.tv_desc) as TextView
+        var tv_author: TextView = view.findViewById(R.id.tv_author) as TextView
     }
 }

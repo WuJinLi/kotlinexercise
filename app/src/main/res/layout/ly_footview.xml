@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <cn.bingoogolapple.bgabanner.BGABanner
+        android:id="@+id/br_banner"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        app:banner_indicatorGravity="bottom|right"
+        app:banner_placeholderDrawable="@drawable/placeholder_banner"
+        app:banner_tipTextColor="#CCFFFFFF"
+        app:banner_tipTextSize="16sp"
+        app:banner_transitionEffect="alpha" />
+</LinearLayout>

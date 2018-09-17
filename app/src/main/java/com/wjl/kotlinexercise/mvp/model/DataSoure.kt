@@ -6,34 +6,61 @@ package com.wjl.kotlinexercise.mvp.model
  * desc  :
  */
 
-data class BannerList(val data:List<Banner>)
-data class Banner(val desc: String, val id: Int, val imagePath: String, val isVisible: Int, val order: Int, val title: String, val type: Int, val url: String)
+
+data class HttpResult<T>(val data: T,
+                         val errorCode: Int,
+                         val errorMsg: String)
+
+data class BannerList(val data: List<Banner>)
+data class Banner(val desc: String,
+                  val id: Int,
+                  val imagePath: String,
+                  val isVisible: Int,
+                  val order: Int,
+                  val title: String,
+                  val type: Int,
+                  val url: String)
 
 
+/**
+ * 文章数据返回实体类
+ */
+data class ArticleResponse(val datas: List<Article>,
+                           val offset: Int,
+                           val over: Boolean,
+                           val pageCount: Int,
+                           val size: Int,
+                           val total: Int)
 
+//文章
+data class Article(
+        val apkLink: String,
+        val author: String,
+        val chapterId: Int,
+        val chapterName: String,
+        var collect: Boolean,
+        val courseId: Int,
+        val desc: String,
+        val envelopePic: String,
+        val fresh: Boolean,
+        val id: Int,
+        val link: String,
+        val niceDate: String,
+        val origin: String,
+        val projectLink: String,
+        val publishTime: Long,
+        val superChapterId: Int,
+        val superChapterName: String,
+        val tags: MutableList<Tag>,
+        val title: String,
+        val type: Int,
+        val userId: Int,
+        val visible: Int,
+        val zan: Int
+)
 
-data class HomeBean(var nextPageUrl: String?,var nextPublishTime: Long,
-                    var newestIssueType: String?,var dialog: Any?,
-                    var issueList: List<IssueListBean>?) {
-
-    data class IssueListBean(var releaseTime: Long,var type: String?,
-                             var date: Long,var publishTime: Long,var count: Int,
-                             var itemList: List<ItemListBean>?) {
-
-        data class ItemListBean(var type: String?,var data: DataBean?,var tag: Any?) {
-
-            data class DataBean(var dataType: String?,var id: Int,var title: String?,
-                                var description:String?, var image: String?,var actionUrl: String?,
-                                var adTrack: Any?,var isShade: Boolean,
-                                var label: Any?,var labelList: Any?,var header: Any?, var category: String?,
-                                var duration: Long?,var playUrl: String,var cover: CoverBean?,var author: AuthorBean?,
-                                var releaseTime : Long?,var consumption: ConsumptionBean?) {
-                data class CoverBean(var feed : String?,var detail : String?,
-                                     var blurred : String?,var sharing : String?,var homepage:String?){}
-                data class ConsumptionBean(var collectionCount: Int,var shareCount: Int, var replyCount: Int) {
-                }
-                data class AuthorBean(var icon: String){}
-            }
-        }
-    }
-}
+/**
+ * 文章tag
+ */
+data class Tag(val name: String,
+               val url: String)
