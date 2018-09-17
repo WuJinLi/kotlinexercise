@@ -18,10 +18,9 @@ import kotlinx.android.synthetic.main.fg_details.*
  * time  : 2018/9/14
  * desc  :
  */
-class DetailsFragment : BaseFragment(), DetailsContact.View {
+class AndroidNewsFragment : BaseFragment(), DetailsContact.View {
     private var mPer: DetailsPresenter? = null
-    private var type: String? = null
-    private var mAdapter: DetailsAdapter?= null
+    private var mAdapter: DetailsAdapter? = null
 
     override fun attachLayoutRes(): Int = R.layout.fg_details
 
@@ -29,7 +28,7 @@ class DetailsFragment : BaseFragment(), DetailsContact.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mPer = DetailsPresenter(context!!, this)
-        mAdapter =DetailsAdapter(context!!)
+        mAdapter = DetailsAdapter(context!!)
     }
 
     override fun initView() {
@@ -39,43 +38,37 @@ class DetailsFragment : BaseFragment(), DetailsContact.View {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        type = arguments!!["type"] as String
 
         recycler_view.run {
-            layoutManager=LinearLayoutManager(context)
-            adapter=mAdapter
+            layoutManager = LinearLayoutManager(context)
+            adapter = mAdapter
         }
 
-        mPer!!.refresh(type!!)
+        mPer!!.refresh()
+
+        swipe_refresh_layout.setOnRefreshListener(refreshListener)
     }
 
 
-    public fun getInstance(type: String): DetailsFragment {
+    public fun getInstance(): AndroidNewsFragment {
 
-        DetailsFragment().let {
-            var bundle: Bundle = Bundle()
-            bundle.let {
-                it.putString("type", type)
-            }
-            arguments = bundle
+        AndroidNewsFragment().let {
             return it
         }
-
-        swipe_refresh_layout.setOnRefreshListener(refreshListener)
-
     }
 
 
     val refreshListener = object : SwipeRefreshLayout.OnRefreshListener {
         override fun onRefresh() {
             //刷新加载最新数据，切禁止刷新最新数据
-            mPer!!.refresh(type!!)
+            mPer!!.refresh()
         }
 
     }
 
     //加载完成
-    override fun refreshComplite(gankBeanList: GankBeanList) {
-        mAdapter!!.setData(gankBeanList as  MutableList<GankBean>)
+    override fun refreshComplite(gankBeanList: List<GankBean>) {
+        mAdapter!!.setData(gankBeanList as MutableList<GankBean>)
+        swipe_refresh_layout.isRefreshing=false
     }
 }

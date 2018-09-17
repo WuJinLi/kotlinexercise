@@ -1,6 +1,7 @@
 package com.wjl.kotlinexercise.refresh.fragment.presenter
 
 import android.content.Context
+import com.wjl.kotlinexercise.applySchedulers
 import com.wjl.kotlinexercise.refresh.fragment.contact.DetailsContact
 import com.wjl.kotlinexercise.refresh.model.GankBeanListModel
 
@@ -24,8 +25,10 @@ class DetailsPresenter(context: Context, view: DetailsContact.View) : DetailsCon
     }
 
 
-    override fun refresh(category: String) {
-        mCurrentPage = 1
-        gankBeanListModel.loadData(mContext!!,  category, mCurrentPage, 20)
+    override fun refresh() {
+        mCurrentPage = 0
+        gankBeanListModel.loadData(mContext!!, "Android", 20, mCurrentPage).applySchedulers().subscribe({gankBeanListModel->
+            mView?.refreshComplite(gankBeanListModel.results)
+        })
     }
 }

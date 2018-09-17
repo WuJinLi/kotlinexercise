@@ -37,9 +37,12 @@ class DetailsAdapter(context: Context) : RecyclerView.Adapter<DetailsAdapter.Det
     override fun getItemCount(): Int = list.size
 
     override fun onBindViewHolder(holder: DetailsViewHolder, position: Int) {
-        holder.gank_item_title.text=list[position].desc
-        holder.gank_item_subtitle.text=list[position].desc
-        Glide.with(mContext!!).load(list[position].images).into(holder.gank_item_image)
+        holder.gank_item_title.text = list[position].desc
+        holder.gank_item_subtitle.text = list[position].desc
+
+        if (list[position].images != null) {
+            Glide.with(mContext!!).load(list[position].images[0]).into(holder.gank_item_image)
+        }
     }
 
 

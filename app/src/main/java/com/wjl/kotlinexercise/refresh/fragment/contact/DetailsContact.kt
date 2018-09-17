@@ -1,5 +1,6 @@
 package com.wjl.kotlinexercise.refresh.fragment.contact
 
+import com.wjl.kotlinexercise.refresh.GankBean
 import com.wjl.kotlinexercise.refresh.GankBeanList
 
 /**
@@ -10,11 +11,11 @@ import com.wjl.kotlinexercise.refresh.GankBeanList
 class DetailsContact {
 
     interface View {
-        fun refreshComplite(gankBeanList: GankBeanList)
+        fun refreshComplite(gankBeanList: List<GankBean>)
     }
 
 
     interface Presenter {
-        fun refresh(category: String)
+        fun refresh()
     }
 }

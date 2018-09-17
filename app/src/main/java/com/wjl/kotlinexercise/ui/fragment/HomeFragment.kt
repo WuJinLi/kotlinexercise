@@ -64,7 +64,7 @@ class HomeFragment : BaseFragment(), HomeContract.View {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        mPresenter.getBannerData()
+//        mPresenter.getBannerData()
     }
 
 

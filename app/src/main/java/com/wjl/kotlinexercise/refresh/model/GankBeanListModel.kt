@@ -13,7 +13,8 @@ import io.reactivex.Observable
  */
 class GankBeanListModel {
 
-    fun loadData(context: Context,  category: String, countPerPage: Int, page: Int): Observable<GankBeanList> {
-        return RetrofitClient.getInstance(context).create(ApiService::class.java)!!.requestData( category, countPerPage, page)
+    fun loadData(context: Context, category: String, countPerPage: Int, page: Int): Observable<GankBeanList> {
+        var url = "https://gank.io/api/data/" + category + "/" + countPerPage + "/" + page
+        return RetrofitClient.getInstance(context).create(ApiService::class.java)!!.requestData(url)
     }
 }

@@ -100,13 +100,12 @@ class MainPageActivity : BaseActivity() {
             }
 
             FRAGMENT_KNOWLEDGE->{
-//                if (mKnowledgeTreeFragment==null){
-//                    mKnowledgeTreeFragment= KnowledgeTreeFragment.getInstance()
-//                    transaction.add(R.id.container,mKnowledgeTreeFragment,"know")
-//                }else{
-//                    transaction.show(mKnowledgeTreeFragment)
-//                }
-                startActivity(Intent(this@MainPageActivity, RefreshActivity::class.java))
+                if (mKnowledgeTreeFragment==null){
+                    mKnowledgeTreeFragment= KnowledgeTreeFragment.getInstance()
+                    transaction.add(R.id.container,mKnowledgeTreeFragment,"know")
+                }else{
+                    transaction.show(mKnowledgeTreeFragment)
+                }
             }
 
 

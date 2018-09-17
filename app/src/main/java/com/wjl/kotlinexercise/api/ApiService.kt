@@ -6,6 +6,7 @@ import com.wjl.kotlinexercise.refresh.GankBeanList
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Url
 
 /**
  * @author: wjl
@@ -21,6 +22,6 @@ interface ApiService {
     fun getBannerData(): Observable<BannerList>
 
 
-    @GET("data/{category}/{pagecount}/{page}")
-    fun requestData( @Path("category") category: String, @Path("pagecount") countPerPage: Int, @Path("page") page: Int): Observable<GankBeanList>
+    @GET()
+    fun requestData(@Url() url: String): Observable<GankBeanList>
 }
