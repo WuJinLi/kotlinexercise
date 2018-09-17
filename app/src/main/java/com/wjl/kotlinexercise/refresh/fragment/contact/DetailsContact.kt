@@ -11,11 +11,16 @@ import com.wjl.kotlinexercise.refresh.GankBeanList
 class DetailsContact {
 
     interface View {
+        fun initDataComplite(gankBeanList: List<GankBean>)
         fun refreshComplite(gankBeanList: List<GankBean>)
+        fun loadMoreComplite(gankBeanList: List<GankBean>)
+        fun setPageStatus(isLoading:Boolean)
     }
 
 
     interface Presenter {
+        fun initData()
         fun refresh()
+        fun loadMore()
     }
 }
