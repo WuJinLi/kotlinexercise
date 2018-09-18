@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.wjl.kotlinexercise.R
@@ -18,7 +19,7 @@ import com.wjl.kotlinexercise.refresh.GankBean
  */
 class DetailsAdapter(context: Context) : RecyclerView.Adapter<DetailsAdapter.DetailsViewHolder>() {
     private var mContext: Context? = null
-    private var list = mutableListOf<GankBean>()
+    public var list = mutableListOf<GankBean>()
 
     init {
         mContext = context
@@ -43,6 +44,13 @@ class DetailsAdapter(context: Context) : RecyclerView.Adapter<DetailsAdapter.Det
         if (list[position].images != null) {
             Glide.with(mContext!!).load(list[position].images[0]).into(holder.gank_item_image)
         }
+
+        holder.ll_item.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                itemClickListener!!.onClick(v, position)
+            }
+
+        })
     }
 
 
@@ -50,5 +58,18 @@ class DetailsAdapter(context: Context) : RecyclerView.Adapter<DetailsAdapter.Det
         var gank_item_title: TextView = itemView.findViewById(R.id.gank_item_title)
         var gank_item_subtitle: TextView = itemView.findViewById(R.id.gank_item_subtitle)
         var gank_item_image: ImageView = itemView.findViewById(R.id.gank_item_image)
+        var ll_item: LinearLayout = itemView.findViewById(R.id.ll_item)
+    }
+
+
+    var itemClickListener: ItemClickListener? = null
+
+    fun setOnItemClickListener(itemClickListener: ItemClickListener) {
+        this.itemClickListener = itemClickListener
+    }
+
+
+    open interface ItemClickListener{
+        fun onClick(v: View?, position: Int)
     }
 }

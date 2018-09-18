@@ -1,5 +1,6 @@
 package com.wjl.kotlinexercise.refresh.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
@@ -9,8 +10,10 @@ import com.wjl.kotlinexercise.base.BaseFragment
 import com.wjl.kotlinexercise.refresh.GankBean
 import com.wjl.kotlinexercise.refresh.GankBeanList
 import com.wjl.kotlinexercise.refresh.adapter.DetailsAdapter
+import com.wjl.kotlinexercise.refresh.adapter.DetailsAdapter.ItemClickListener
 import com.wjl.kotlinexercise.refresh.fragment.contact.DetailsContact
 import com.wjl.kotlinexercise.refresh.fragment.presenter.DetailsPresenter
+import com.wjl.kotlinexercise.ui.WebViewDetailActivity
 import com.wjl.kotlinexercise.utils.AdapterWrapper
 import com.wjl.kotlinexercise.utils.SwipeToLoadHelper
 import kotlinx.android.synthetic.main.fg_details.*
@@ -58,6 +61,17 @@ class AndroidNewsFragment : BaseFragment(), DetailsContact.View, SwipeToLoadHelp
 
         loadHelper = SwipeToLoadHelper(recycler_view, warpperAdapter!!)
         loadHelper!!.setLoadMoreListener(this)
+
+
+        mAdapter!!.setOnItemClickListener(object : DetailsAdapter.ItemClickListener {
+            override fun onClick(v: View?, position: Int) {
+                Intent(context, WebViewDetailActivity::class.java).run {
+                    putExtra("url", mAdapter!!.list[position].url)
+                    startActivity(this)
+                }
+            }
+
+        })
     }
 
     public fun getInstance(): AndroidNewsFragment {
