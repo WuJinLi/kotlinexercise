@@ -1,5 +1,6 @@
 package com.wjl.kotlinexercise.utils;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,9 +47,11 @@ public class AdapterWrapper extends RecyclerView.Adapter {
     private int mAdapterType = ADAPTER_TYPE_LINEAR;
 
     private int mSpanCount;
+    private Context mContext;
 
-    public AdapterWrapper(RecyclerView.Adapter adapter) {
+    public AdapterWrapper(RecyclerView.Adapter adapter, Context context) {
         mAdapter = adapter;
+        mContext = context;
     }
 
     /**
@@ -73,7 +76,8 @@ public class AdapterWrapper extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == ITEM_TYPE_LOAD) {
             if (mWrapperHolder == null) {
-                mWrapperHolder = new WrapperHolder(View.inflate(parent.getContext(), R.layout.item_load_more, null));
+                mWrapperHolder = new WrapperHolder(View.inflate(mContext, R.layout
+                        .item_load_more, null));
             }
             return mWrapperHolder;
         } else {
@@ -132,9 +136,10 @@ public class AdapterWrapper extends RecyclerView.Adapter {
     }
 
     public void setLoadItemState(boolean isLoading) {
-//        if (mWrapperHolder==null){
-//            mWrapperHolder = new WrapperHolder(View.inflate(parent.getContext(), R.layout.item_load_more, null));
-//        }
+        if (mWrapperHolder == null) {
+            mWrapperHolder = new WrapperHolder(View.inflate(mContext, R.layout.item_load_more,
+                    null));
+        }
         if (isLoading) {
             mWrapperHolder.setLoadText("正在加载...");
             mWrapperHolder.setLoadPbVisibility(true);
@@ -152,8 +157,8 @@ public class AdapterWrapper extends RecyclerView.Adapter {
 
         WrapperHolder(View itemView) {
             super(itemView);
-            mLoadTv=itemView.findViewById(R.id.item_load_tv);
-            mLoadPb=itemView.findViewById(R.id.item_load_tv);
+            mLoadTv = itemView.findViewById(R.id.item_load_tv);
+            mLoadPb = itemView.findViewById(R.id.item_load_pb);
         }
 
         void setLoadText(CharSequence text) {

@@ -12,11 +12,10 @@ class DetailsContact {
 
     interface View {
         fun initDataComplite(gankBeanList: List<GankBean>)
-        fun refreshComplite(gankBeanList: List<GankBean>)
+        fun reFreshComplite(gankBeanList: List<GankBean>)
         fun loadMoreComplite(gankBeanList: List<GankBean>)
         fun setPageStatus(isLoading:Boolean)
     }
-
 
     interface Presenter {
         fun initData()

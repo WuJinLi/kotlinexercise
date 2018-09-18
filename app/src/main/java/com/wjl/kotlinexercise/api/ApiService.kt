@@ -2,7 +2,6 @@ package com.wjl.kotlinexercise.api
 
 import com.wjl.kotlinexercise.mvp.model.ArticleResponse
 import com.wjl.kotlinexercise.mvp.model.BannerList
-import com.wjl.kotlinexercise.mvp.model.HomeBean
 import com.wjl.kotlinexercise.refresh.GankBeanList
 import com.wjl.kotlinexercise.mvp.model.HttpResult
 import io.reactivex.Observable

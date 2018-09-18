@@ -31,12 +31,14 @@ class DetailsPresenter(context: Context, view: DetailsContact.View) : DetailsCon
 
     override fun initData() {
         mCurrentPage = 1
+        mView!!.setPageStatus(true)
         loadData(Constant.REQUEST_INIT)
     }
 
     //刷新数据
     override fun refresh() {
         mCurrentPage = 1
+        mView!!.setPageStatus(true)
         loadData(Constant.REQUEST_REFRESH)
     }
 
@@ -44,6 +46,7 @@ class DetailsPresenter(context: Context, view: DetailsContact.View) : DetailsCon
     //加载更多
     override fun loadMore() {
         mCurrentPage++
+        mView!!.setPageStatus(true)
         loadData(Constant.REQUEST_LOAD_MORE)
     }
 
@@ -53,9 +56,8 @@ class DetailsPresenter(context: Context, view: DetailsContact.View) : DetailsCon
      */
     private fun loadData(requestType: Int) {
         gankBeanListModel.loadData(mContext!!, "Android", 20, mCurrentPage).applySchedulers().subscribe({ gankBeanListModel ->
-            //            mView?.refreshComplite(gankBeanListModel.results)
             when (requestType) {
-                0 ->
+                Constant.REQUEST_INIT ->
                     mView!!.run {
                         mList.run {
                             clear()
@@ -65,21 +67,23 @@ class DetailsPresenter(context: Context, view: DetailsContact.View) : DetailsCon
                         setPageStatus(false)
                     }
 
-                1 ->
+                Constant.REQUEST_REFRESH ->
                     mView!!.run {
                         mList.run {
                             clear()
                             addAll(gankBeanListModel.results)
                         }
-                        refreshComplite(mList)
+                        reFreshComplite(mList)
+                        setPageStatus(false)
                     }
 
-                2 ->
+                Constant.REQUEST_LOAD_MORE ->
                     mView!!.run {
                         mList.run {
                             addAll(gankBeanListModel.results)
                         }
                         loadMoreComplite(mList)
+                        setPageStatus(false)
                     }
             }
         })

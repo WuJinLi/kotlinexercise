@@ -35,8 +35,6 @@ class HomeFragment : BaseFragment(), HomeContract.View {
     private lateinit var bannerDatas: ArrayList<Banner>
     private var articlesAdapter: ArticlesAdapter? = null
     private var isRefresh = true
-    private var visibleLastIndex = 0
-    private var visibleItemCount = 0
     private var pagemun = 0
 
     companion object {
@@ -65,37 +63,13 @@ class HomeFragment : BaseFragment(), HomeContract.View {
             isRefreshing = true
             setOnRefreshListener(onRefreshListener)
         }
-
-        lv_listview!!.setOnScrollChangeListener(object : AbsListView.OnScrollListener, View.OnScrollChangeListener {
-            override fun onScrollChange(v: View?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int) {
-            }
-
-            override fun onScrollStateChanged(view: AbsListView?, scrollState: Int) {
-                val itemsLastIndex = articlesAdapter!!.count - 1
-                val lastIndex = itemsLastIndex + 1
-
-                if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE && visibleLastIndex == lastIndex) {
-                    // 如果是自动加载,可以在这里放置异步加载数据的代码
-                    pagemun++
-                    mPresenter.getArticles(pagemun)
-                }
-            }
-
-            override fun onScroll(view: AbsListView?, firstVisibleItem: Int, visibleItemCount: Int, totalItemCount: Int) {
-                this@HomeFragment.visibleItemCount = visibleItemCount
-                visibleLastIndex = firstVisibleItem + visibleItemCount - 1
-            }
-
-        })
-
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         mPresenter.getBannerData()
         mPresenter.getArticles(0)
-
-//        mPresenter.getBannerData()
+        mPresenter.getBannerData()
     }
 
 
@@ -150,10 +124,7 @@ class HomeFragment : BaseFragment(), HomeContract.View {
     private val onRefreshListener = SwipeRefreshLayout.OnRefreshListener {
         isRefresh = true
         pagemun = 0
-//        mPresenter.getBannerData()
         mPresenter.getArticles(pagemun)
     }
-
-
 }
 

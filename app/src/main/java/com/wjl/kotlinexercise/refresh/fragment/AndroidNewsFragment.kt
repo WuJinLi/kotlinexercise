@@ -23,7 +23,7 @@ import java.util.function.DoubleToIntFunction
  * time  : 2018/9/14
  * desc  :
  */
-class AndroidNewsFragment : BaseFragment(), DetailsContact.View, SwipeToLoadHelper.LoadMoreListener {
+class AndroidNewsFragment : BaseFragment(), DetailsContact.View, SwipeToLoadHelper.LoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
 
     private var mPer: DetailsPresenter? = null
     private var mAdapter: DetailsAdapter? = null
@@ -36,6 +36,8 @@ class AndroidNewsFragment : BaseFragment(), DetailsContact.View, SwipeToLoadHelp
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mPer = DetailsPresenter(context!!, this)
+        mAdapter = DetailsAdapter(context!!)
+        warpperAdapter = AdapterWrapper(mAdapter, context)
     }
 
     override fun initView() {
@@ -45,22 +47,17 @@ class AndroidNewsFragment : BaseFragment(), DetailsContact.View, SwipeToLoadHelp
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        mAdapter = DetailsAdapter(context!!)
-
         recycler_view.run {
             layoutManager = LinearLayoutManager(context)
             adapter = mAdapter
         }
-
-
-        warpperAdapter = AdapterWrapper(mAdapter)
+        //初始化页面数据
+        mPer!!.initData()
+        //设置刷新数据监听器
+        swipe_refresh_layout.setOnRefreshListener(this)
 
         loadHelper = SwipeToLoadHelper(recycler_view, warpperAdapter!!)
         loadHelper!!.setLoadMoreListener(this)
-
-        mPer!!.initData()
-
-        swipe_refresh_layout.setOnRefreshListener(refreshListener)
     }
 
     public fun getInstance(): AndroidNewsFragment {
@@ -69,23 +66,19 @@ class AndroidNewsFragment : BaseFragment(), DetailsContact.View, SwipeToLoadHelp
         }
     }
 
-    val refreshListener = object : SwipeRefreshLayout.OnRefreshListener {
-        override fun onRefresh() {
-            //刷新加载最新数据，切禁止刷新最新数据
-            mPer!!.refresh()
-            loadHelper!!.setSwipeToLoadEnabled(false)
-        }
+    override fun onRefresh() {
+        //刷新加载最新数据，切禁止刷新最新数据
+        mPer!!.refresh()
+        loadHelper!!.setSwipeToLoadEnabled(false)
     }
-
 
     //初始化数据完成
     override fun initDataComplite(gankBeanList: List<GankBean>) {
         mAdapter!!.setData(gankBeanList as MutableList<GankBean>)
-
     }
 
     //刷新数据完成
-    override fun refreshComplite(gankBeanList: List<GankBean>) {
+    override fun reFreshComplite(gankBeanList: List<GankBean>) {
         mAdapter!!.setData(gankBeanList as MutableList<GankBean>)
         swipe_refresh_layout.isRefreshing = false
         loadHelper!!.setSwipeToLoadEnabled(true)
@@ -95,6 +88,7 @@ class AndroidNewsFragment : BaseFragment(), DetailsContact.View, SwipeToLoadHelp
         mAdapter!!.setData(gankBeanList as MutableList<GankBean>)
         swipe_refresh_layout.isEnabled = true
         loadHelper!!.setLoadMoreFinish()
+        warpperAdapter!!.notifyDataSetChanged()
     }
 
 
