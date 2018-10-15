@@ -12,18 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".MainActivity">
-
-        </activity>
-
-
         <activity
-            android:name=".DetailActivity"
-            android:screenOrientation="portrait" />
-
-
-        <activity
-            android:name=".ui.MainPageActivity"
+            android:name=".openeye.ui.WelcomeActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,14 +21,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity"></activity>
+        <activity
+            android:name=".DetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.MainPageActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".refresh.RefreshActivity"
-            android:screenOrientation="portrait"></activity>
-
+            android:screenOrientation="portrait" />
         <activity android:name=".ui.WebViewDetailActivity" />
+        <!-- <activity android:name=".refresh.RefreshActivity"/> -->
 
-        <!--<activity android:name=".refresh.RefreshActivity"/>-->
-
+        <activity
+            android:name=".openeye.ui.HomeMainActivity"
+            android:label="@string/title_activity_home_main"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 
 </manifest>

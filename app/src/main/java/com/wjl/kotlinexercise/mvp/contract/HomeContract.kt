@@ -11,7 +11,7 @@ import com.wjl.kotlinexercise.mvp.view.IBaseView
  * desc  :
  */
 class HomeContract {
-    interface View : IBaseView<Presenter> {
+    interface View {
         fun setData(bean: List<Banner>)
         fun setArticles(articleList: List<Article>)
     }

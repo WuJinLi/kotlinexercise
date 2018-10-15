@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+
+    <ImageView
+        android:id="@+id/iv_welcome_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/img_eye_loading_icon"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:padding="20dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/eye_loading_icon" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_welcome_china"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="@string/tv_welcome_english"
+        android:textColor="@color/White"
+        android:textSize="14sp"
+
+        />
+
+    <TextView
+        android:id="@+id/tv_welcome_china"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="@string/tv_welcome_chinese"
+        android:textColor="@color/White"
+        android:textSize="14sp"
+
+        />
+</RelativeLayout>

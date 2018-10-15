@@ -7,4 +7,7 @@
     <color name="viewBackground">@color/White</color>
     <color name="Blue_Grey">#607d8b</color>
     <color name="textColorPrimary">#616161</color>
+
+    <!--黑色-->
+    <color name="black">#000000</color>
 </resources>

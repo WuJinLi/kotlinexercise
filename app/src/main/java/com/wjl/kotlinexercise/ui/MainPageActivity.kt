@@ -93,18 +93,18 @@ class MainPageActivity : BaseActivity() {
             FRAGMENT_HOME->{
                 if (mHomeFragment==null){
                     mHomeFragment=HomeFragment.getInstance()
-                    transaction.add(R.id.container,mHomeFragment,"home")
+                    transaction.add(R.id.container, mHomeFragment!!,"home")
                 }else{
-                    transaction.show(mHomeFragment)
+                    transaction.show(mHomeFragment!!)
                 }
             }
 
             FRAGMENT_KNOWLEDGE->{
                 if (mKnowledgeTreeFragment==null){
                     mKnowledgeTreeFragment= KnowledgeTreeFragment.getInstance()
-                    transaction.add(R.id.container,mKnowledgeTreeFragment,"know")
+                    transaction.add(R.id.container, mKnowledgeTreeFragment!!,"know")
                 }else{
-                    transaction.show(mKnowledgeTreeFragment)
+                    transaction.show(mKnowledgeTreeFragment!!)
                 }
             }
 
@@ -112,9 +112,9 @@ class MainPageActivity : BaseActivity() {
             FRAGMENT_NAVIGATION->{
                 if (mNavigationFragment==null){
                     mNavigationFragment=NavigationFragment.getInstance()
-                    transaction.add(R.id.container,mNavigationFragment,"navigation")
+                    transaction.add(R.id.container, mNavigationFragment!!,"navigation")
                 }else{
-                    transaction.show(mNavigationFragment)
+                    transaction.show(mNavigationFragment!!)
                 }
             }
 
@@ -122,9 +122,9 @@ class MainPageActivity : BaseActivity() {
             FRAGMENT_PROJECT->{
                 if (mProjectFragment==null){
                     mProjectFragment= ProjectFragment.getInstance()
-                    transaction.add(R.id.container,mProjectFragment,"project")
+                    transaction.add(R.id.container, mProjectFragment!!,"project")
                 }else{
-                    transaction.show(mProjectFragment)
+                    transaction.show(mProjectFragment!!)
                 }
             }
 

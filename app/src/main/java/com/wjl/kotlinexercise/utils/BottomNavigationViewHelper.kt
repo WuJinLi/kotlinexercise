@@ -25,7 +25,7 @@ class BottomNavigationViewHelper {
                 var i = 0
                 do {
                     var item: BottomNavigationItemView = menuView.getChildAt(i) as BottomNavigationItemView
-                    item.setShiftingMode(false)
+//                    item.setShiftingMode(false)
                     item.setChecked(item.itemData.isChecked)
                     i++
                 } while (i < menuView.childCount)

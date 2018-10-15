@@ -5,6 +5,6 @@ package com.wjl.kotlinexercise.mvp.view
  * time  : 2018/9/7
  * desc  :
  */
-interface IBaseView<in T> {
+interface IBaseView {
 
 }

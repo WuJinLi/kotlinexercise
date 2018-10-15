@@ -4,6 +4,7 @@ import com.wjl.kotlinexercise.mvp.model.ArticleResponse
 import com.wjl.kotlinexercise.mvp.model.BannerList
 import com.wjl.kotlinexercise.refresh.GankBeanList
 import com.wjl.kotlinexercise.mvp.model.HttpResult
+import com.wjl.kotlinexercise.openeye.bean.CategroyBean
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -33,4 +34,7 @@ interface ApiService {
 
     @GET()
     fun requestData(@Url() url: String): Observable<GankBeanList>
+
+    @GET()
+    fun getCategroyData(@Url url:String):Observable<CategroyBean>
 }

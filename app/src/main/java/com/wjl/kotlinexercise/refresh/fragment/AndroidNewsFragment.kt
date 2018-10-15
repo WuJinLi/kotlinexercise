@@ -8,17 +8,12 @@ import android.view.View
 import com.wjl.kotlinexercise.R
 import com.wjl.kotlinexercise.base.BaseFragment
 import com.wjl.kotlinexercise.refresh.GankBean
-import com.wjl.kotlinexercise.refresh.GankBeanList
 import com.wjl.kotlinexercise.refresh.adapter.DetailsAdapter
-import com.wjl.kotlinexercise.refresh.adapter.DetailsAdapter.ItemClickListener
 import com.wjl.kotlinexercise.refresh.fragment.contact.DetailsContact
 import com.wjl.kotlinexercise.refresh.fragment.presenter.DetailsPresenter
 import com.wjl.kotlinexercise.ui.WebViewDetailActivity
 import com.wjl.kotlinexercise.utils.AdapterWrapper
-import com.wjl.kotlinexercise.utils.SwipeToLoadHelper
 import kotlinx.android.synthetic.main.fg_details.*
-import java.util.*
-import java.util.function.DoubleToIntFunction
 
 
 /**
@@ -26,12 +21,11 @@ import java.util.function.DoubleToIntFunction
  * time  : 2018/9/14
  * desc  :
  */
-class AndroidNewsFragment : BaseFragment(), DetailsContact.View, SwipeToLoadHelper.LoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
+class AndroidNewsFragment : BaseFragment(), DetailsContact.View, SwipeRefreshLayout.OnRefreshListener {
 
     private var mPer: DetailsPresenter? = null
     private var mAdapter: DetailsAdapter? = null
     private var warpperAdapter: AdapterWrapper? = null
-    private var loadHelper: SwipeToLoadHelper? = null
 
     override fun attachLayoutRes(): Int = R.layout.fg_details
 
@@ -59,8 +53,6 @@ class AndroidNewsFragment : BaseFragment(), DetailsContact.View, SwipeToLoadHelp
         //设置刷新数据监听器
         swipe_refresh_layout.setOnRefreshListener(this)
 
-        loadHelper = SwipeToLoadHelper(recycler_view, warpperAdapter!!)
-        loadHelper!!.setLoadMoreListener(this)
 
 
         mAdapter!!.setOnItemClickListener(object : DetailsAdapter.ItemClickListener {
@@ -83,7 +75,6 @@ class AndroidNewsFragment : BaseFragment(), DetailsContact.View, SwipeToLoadHelp
     override fun onRefresh() {
         //刷新加载最新数据，切禁止刷新最新数据
         mPer!!.refresh()
-        loadHelper!!.setSwipeToLoadEnabled(false)
     }
 
     //初始化数据完成
@@ -95,22 +86,15 @@ class AndroidNewsFragment : BaseFragment(), DetailsContact.View, SwipeToLoadHelp
     override fun reFreshComplite(gankBeanList: List<GankBean>) {
         mAdapter!!.setData(gankBeanList as MutableList<GankBean>)
         swipe_refresh_layout.isRefreshing = false
-        loadHelper!!.setSwipeToLoadEnabled(true)
     }
 
     override fun loadMoreComplite(gankBeanList: List<GankBean>) {
         mAdapter!!.setData(gankBeanList as MutableList<GankBean>)
         swipe_refresh_layout.isEnabled = true
-        loadHelper!!.setLoadMoreFinish()
         warpperAdapter!!.notifyDataSetChanged()
     }
 
 
-    //加载更多
-    override fun onLoad() {
-        swipe_refresh_layout.isEnabled = false
-        mPer!!.loadMore()
-    }
 
 
     override fun setPageStatus(isLoading: Boolean) {
