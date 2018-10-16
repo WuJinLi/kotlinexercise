@@ -12,6 +12,7 @@ import com.wjl.kotlinexercise.openeye.bean.CategroyBean
 class HomeMainContract {
     interface IHomeViewNavgitionView :IBaseView {
         fun setNavigitionView(categroyBean: CategroyBean)
+        fun loadDataFailed()
     }
 
     interface HomePresenter : IBasePresenter {

@@ -1,8 +1,8 @@
 package com.wjl.kotlinexercise.openeye.presenter
 
 import android.content.Context
+import android.widget.Toast
 import com.wjl.kotlinexercise.applySchedulers
-import com.wjl.kotlinexercise.mvp.view.IBaseView
 import com.wjl.kotlinexercise.openeye.bean.CategroyBean
 import com.wjl.kotlinexercise.openeye.contract.HomeMainContract
 import com.wjl.kotlinexercise.openeye.model.HomeMainModel
@@ -29,12 +29,9 @@ class HomeMainPresenter(context: Context, view: HomeMainContract.IHomeViewNavgit
     override fun getData() {
         homeMainModel.getCategroyData(mContext!!).applySchedulers().subscribe({ categroy: CategroyBean? ->
             mView!!.setNavigitionView(categroy!!)
-        },
-                {
-
-                }
-                , {
-
+        },{
+            throwable: Throwable? ->
+            mView!!.loadDataFailed()
         }
         )
     }

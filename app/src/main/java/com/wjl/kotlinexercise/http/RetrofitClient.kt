@@ -43,7 +43,7 @@ class RetrofitClient private constructor(context: Context) {
                 .addNetworkInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .cache(cache)
                 .addInterceptor(CacheInterceptor(context))
-                .addNetworkInterceptor(CacheInterceptor(context))
+                .addNetworkInterceptor(HttpLoggingInterceptor(HttpLogger()))
                 .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .build()

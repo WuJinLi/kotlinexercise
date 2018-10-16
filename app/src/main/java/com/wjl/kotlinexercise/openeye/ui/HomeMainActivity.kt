@@ -4,6 +4,8 @@ import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
 import com.google.gson.Gson
 import com.wjl.kotlinexercise.R
 import com.wjl.kotlinexercise.base.BaseActivity
@@ -15,6 +17,8 @@ import kotlinx.android.synthetic.main.app_bar_home_main.*
 import kotlinx.android.synthetic.main.content_home_main.*
 
 class HomeMainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener, HomeMainContract.IHomeViewNavgitionView{
+
+
     var homePresenter: HomeMainPresenter? =null
 
     override fun attachLayoutRes() = R.layout.ac_home_main
@@ -33,7 +37,15 @@ class HomeMainActivity : BaseActivity(), NavigationView.OnNavigationItemSelected
 
         nav_view.setNavigationItemSelectedListener(this)
 
-        homePresenter!!.getData()
+
+        btn_button.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(p0: View?) {
+                homePresenter!!.getData()
+            }
+
+        })
+
+
 
     }
 
@@ -81,4 +93,7 @@ class HomeMainActivity : BaseActivity(), NavigationView.OnNavigationItemSelected
     }
 
 
+    override fun loadDataFailed() {
+        Toast.makeText(mContext,"数据异常，请退出重试",Toast.LENGTH_SHORT).show()
+    }
 }

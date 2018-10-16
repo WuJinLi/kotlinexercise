@@ -3,6 +3,7 @@ package com.wjl.kotlinexercise.app
 import android.app.Application
 import android.content.Context
 import android.support.multidex.MultiDexApplication
+import com.wjl.kotlinexercise.http.LogUtil
 import kotlin.properties.Delegates
 
 /**
@@ -19,5 +20,10 @@ class App : MultiDexApplication() {
         lateinit var instance: Application
 
 
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        LogUtil.init(true)
     }
 }
