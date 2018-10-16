@@ -44,7 +44,6 @@ class RetrofitClient private constructor(context: Context) {
         //okhttp创建了
         okHttpClient = OkHttpClient.Builder()
                 .cache(cache)
-                .addInterceptor(CacheInterceptor(context))
                 .addNetworkInterceptor(logInterceptor)
                 .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)

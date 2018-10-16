@@ -1,7 +1,7 @@
 package com.wjl.kotlinexercise.api
 
-import io.reactivex.Observable
 import com.wjl.kotlinexercise.test.HeWeather6Model
+import io.reactivex.Observable
 import retrofit2.http.*
 
 

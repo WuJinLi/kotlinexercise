@@ -11,6 +11,6 @@ import com.wjl.kotlinexercise.http.LogUtil
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
-        LogUtil.init(false)
+        LogUtil.init(true)
     }
 }

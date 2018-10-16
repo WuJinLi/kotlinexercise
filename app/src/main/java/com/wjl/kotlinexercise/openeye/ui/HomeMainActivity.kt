@@ -35,10 +35,13 @@ class HomeMainActivity : BaseActivity(), NavigationView.OnNavigationItemSelected
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
-        nav_view.setNavigationItemSelectedListener(this)
+
+
+        btn_button.text="获取数据"
     }
 
     override fun initListener() {
+        nav_view.setNavigationItemSelectedListener(this)
         btn_button.setOnClickListener(this)
         btn_jump.setOnClickListener(this)
     }
