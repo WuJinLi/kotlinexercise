@@ -1,5 +1,7 @@
 package com.wjl.kotlinexercise.api
 
+import com.wjl.kotlinexercise.openeye.model.AllCategroyModel
+import com.wjl.kotlinexercise.openeye.model.CategroyModel
 import com.wjl.kotlinexercise.test.HeWeather6Model
 import io.reactivex.Observable
 import retrofit2.http.*
@@ -12,5 +14,19 @@ import retrofit2.http.*
 interface ApiService {
 
     @GET()
-    fun getWeatherData(@Url url:String):Observable<HeWeather6Model>
+    fun getWeatherData(@Url url: String): Observable<HeWeather6Model>
+
+
+    /**
+     * 获取全部总类接口
+     */
+    @GET()
+    fun getAllCategroyData(@Url url:String): Observable<AllCategroyModel>
+
+
+    /**
+     * 侧划栏目录
+     */
+    @GET()
+    fun getCategroyData(@Url url:String):Observable<CategroyModel>
 }

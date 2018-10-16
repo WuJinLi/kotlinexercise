@@ -14,11 +14,25 @@ object Constant {
 
 
 
-
     //和风天气测试数据配置信息
     const val APP_KEY:String="52dc04b1b08a43dc9f51325a5b5cb87b"
     const val HEWIND_BASE_URL="https://search.heweather.com/"
 
 
     const val URL="https://free-api.heweather.com/s6/weather/forecast?location=北京&key=52dc04b1b08a43dc9f51325a5b5cb87b"
+
+
+
+
+
+
+
+
+
+    /******************************************开眼接口**************************************************/
+
+    // all category
+    const val allCategoryUrl = "http://baobab.kaiyanapp.com/api/v4/categories/all"
+
+    const val categoryUrl = "http://baobab.kaiyanapp.com/api/v5/category/list"
 }
