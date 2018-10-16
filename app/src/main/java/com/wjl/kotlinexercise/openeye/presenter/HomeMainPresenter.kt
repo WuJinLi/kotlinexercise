@@ -1,11 +1,11 @@
 package com.wjl.kotlinexercise.openeye.presenter
 
 import android.content.Context
-import android.widget.Toast
+import com.wjl.kotlinexercise.Constant
+import com.wjl.kotlinexercise.api.ApiService
 import com.wjl.kotlinexercise.applySchedulers
-import com.wjl.kotlinexercise.openeye.bean.CategroyBean
+import com.wjl.kotlinexercise.http.RetrofitClient
 import com.wjl.kotlinexercise.openeye.contract.HomeMainContract
-import com.wjl.kotlinexercise.openeye.model.HomeMainModel
 
 /**
  * author: WuJinLi
@@ -22,17 +22,23 @@ class HomeMainPresenter(context: Context, view: HomeMainContract.IHomeViewNavgit
         mView = view
     }
 
-    val homeMainModel: HomeMainModel by lazy {
-        HomeMainModel()
-    }
 
     override fun getData() {
-        homeMainModel.getCategroyData(mContext!!).applySchedulers().subscribe({ categroy: CategroyBean? ->
-            mView!!.setNavigitionView(categroy!!)
-        },{
-            throwable: Throwable? ->
-            mView!!.loadDataFailed()
-        }
-        )
+        RetrofitClient.getInstance(mContext!!).create(ApiService::class.java)!!.getWeatherData(Constant.URL)!!.applySchedulers().subscribe(
+                {
+                    mView!!.apply {
+                        setNavigitionView(heWeather6Model = it)
+                    }
+                },
+                {
+                    it.printStackTrace()
+                    mView!!.apply {
+                        loadDataFailed()
+                    }
+                }
+                ,
+                {
+
+                })
     }
 }

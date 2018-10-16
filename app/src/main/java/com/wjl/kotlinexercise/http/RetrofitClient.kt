@@ -38,12 +38,14 @@ class RetrofitClient private constructor(context: Context) {
         } catch (e: Exception) {
             Log.e("OKHttp", "Could not create http cache", e)
         }
+
+        val logInterceptor = HttpLoggingInterceptor(HttpLogger())
+        logInterceptor.level = HttpLoggingInterceptor.Level.BODY
         //okhttp创建了
         okHttpClient = OkHttpClient.Builder()
-                .addNetworkInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .cache(cache)
                 .addInterceptor(CacheInterceptor(context))
-                .addNetworkInterceptor(HttpLoggingInterceptor(HttpLogger()))
+                .addNetworkInterceptor(logInterceptor)
                 .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .build()

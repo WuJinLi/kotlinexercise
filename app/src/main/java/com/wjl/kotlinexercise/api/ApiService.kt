@@ -1,14 +1,9 @@
 package com.wjl.kotlinexercise.api
 
-import com.wjl.kotlinexercise.mvp.model.ArticleResponse
-import com.wjl.kotlinexercise.mvp.model.BannerList
-import com.wjl.kotlinexercise.refresh.GankBeanList
-import com.wjl.kotlinexercise.mvp.model.HttpResult
-import com.wjl.kotlinexercise.openeye.bean.CategroyBean
 import io.reactivex.Observable
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Url
+import com.wjl.kotlinexercise.test.HeWeather6Model
+import retrofit2.http.*
+
 
 /**
  * @author: wjl
@@ -16,25 +11,6 @@ import retrofit2.http.Url
  */
 interface ApiService {
 
-
-    /**
-     * 轮播图
-     */
-    //http://www.wanandroid.com/
-    @GET("banner/json")
-    fun getBannerData(): Observable<BannerList>
-
-
-    /**
-     * 获取文章信息列表
-     */
-    @GET("article/list/{pageNum}/json")
-    fun getArticle(@Path("pageNum") pageNum: Int): Observable<HttpResult<ArticleResponse>>
-
-
     @GET()
-    fun requestData(@Url() url: String): Observable<GankBeanList>
-
-    @GET()
-    fun getCategroyData(@Url url:String):Observable<CategroyBean>
+    fun getWeatherData(@Url url:String):Observable<HeWeather6Model>
 }

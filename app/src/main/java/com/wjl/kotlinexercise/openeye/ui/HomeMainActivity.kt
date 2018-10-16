@@ -9,22 +9,22 @@ import android.widget.Toast
 import com.google.gson.Gson
 import com.wjl.kotlinexercise.R
 import com.wjl.kotlinexercise.base.BaseActivity
-import com.wjl.kotlinexercise.openeye.bean.CategroyBean
 import com.wjl.kotlinexercise.openeye.contract.HomeMainContract
 import com.wjl.kotlinexercise.openeye.presenter.HomeMainPresenter
+import com.wjl.kotlinexercise.test.HeWeather6Model
+import com.wjl.kotlinexercise.ui.MainPageActivity
 import kotlinx.android.synthetic.main.ac_home_main.*
 import kotlinx.android.synthetic.main.app_bar_home_main.*
 import kotlinx.android.synthetic.main.content_home_main.*
 
-class HomeMainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener, HomeMainContract.IHomeViewNavgitionView{
+class HomeMainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener, HomeMainContract.IHomeViewNavgitionView, View.OnClickListener {
 
-
-    var homePresenter: HomeMainPresenter? =null
+    var homePresenter: HomeMainPresenter? = null
 
     override fun attachLayoutRes() = R.layout.ac_home_main
 
     override fun initData() {
-        homePresenter=HomeMainPresenter(mContext,HomeMainActivity@this)
+        homePresenter = HomeMainPresenter(mContext, HomeMainActivity@ this)
     }
 
     override fun initViews() {
@@ -36,20 +36,36 @@ class HomeMainActivity : BaseActivity(), NavigationView.OnNavigationItemSelected
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
-
-
-        btn_button.setOnClickListener(object : View.OnClickListener{
-            override fun onClick(p0: View?) {
-                homePresenter!!.getData()
-            }
-
-        })
-
-
-
     }
 
     override fun initListener() {
+        btn_button.setOnClickListener(this)
+        btn_jump.setOnClickListener(this)
+    }
+
+
+    override fun onClick(p0: View?) {
+//        when (p0.id) {
+//            R.id.btn_jump -> {
+//                startActivity(intent.setClass(this@HomeMainActivity,MainPageActivity::class.java))
+//                this@HomeMainActivity.finish()
+//            }
+//
+//            R.id.btn_button -> {
+//                homePresenter!!.getData()
+//            }
+//        }
+
+
+        when (p0) {
+            btn_jump -> {
+                startActivity(intent.setClass(this@HomeMainActivity, MainPageActivity::class.java))
+            }
+
+            btn_button -> {
+                homePresenter!!.getData()
+            }
+        }
     }
 
 
@@ -65,7 +81,6 @@ class HomeMainActivity : BaseActivity(), NavigationView.OnNavigationItemSelected
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_camera -> {
-                // Handle the camera action
             }
             R.id.nav_gallery -> {
 
@@ -88,12 +103,12 @@ class HomeMainActivity : BaseActivity(), NavigationView.OnNavigationItemSelected
         return true
     }
 
-    override fun setNavigitionView(categroyBean: CategroyBean) {
-        tv_show.text=categroyBean.itemList.size.toString()
+    override fun setNavigitionView(heWeather6Model: HeWeather6Model) {
+        tv_show.text = Gson().toJson(heWeather6Model)
     }
 
 
     override fun loadDataFailed() {
-        Toast.makeText(mContext,"数据异常，请退出重试",Toast.LENGTH_SHORT).show()
+        Toast.makeText(mContext, "数据异常，请退出重试", Toast.LENGTH_SHORT).show()
     }
 }

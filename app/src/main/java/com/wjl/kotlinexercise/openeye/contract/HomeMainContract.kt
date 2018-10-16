@@ -1,8 +1,6 @@
 package com.wjl.kotlinexercise.openeye.contract
 
-import com.wjl.kotlinexercise.mvp.presenter.IBasePresenter
-import com.wjl.kotlinexercise.mvp.view.IBaseView
-import com.wjl.kotlinexercise.openeye.bean.CategroyBean
+import com.wjl.kotlinexercise.test.HeWeather6Model
 
 /**
  * author: WuJinLi
@@ -10,12 +8,12 @@ import com.wjl.kotlinexercise.openeye.bean.CategroyBean
  * desc  :
  */
 class HomeMainContract {
-    interface IHomeViewNavgitionView :IBaseView {
-        fun setNavigitionView(categroyBean: CategroyBean)
+    interface IHomeViewNavgitionView {
+        fun setNavigitionView(heWeather6Model: HeWeather6Model)
         fun loadDataFailed()
     }
 
-    interface HomePresenter : IBasePresenter {
+    interface HomePresenter  {
         fun getData()
     }
 }
