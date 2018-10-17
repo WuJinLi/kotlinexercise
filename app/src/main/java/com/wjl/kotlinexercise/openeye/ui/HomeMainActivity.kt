@@ -1,11 +1,9 @@
 package com.wjl.kotlinexercise.openeye.ui
 
-import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import com.google.gson.Gson
@@ -27,7 +25,6 @@ class HomeMainActivity : BaseActivity(), HomeMainContract.IHomeViewNavgitionView
 
     var homePresenter: HomeMainPresenter? = null
     var categroyNavAdapter:CategroyNavAdapter?=null
-    var categroyModelList:MutableList<CategroyModel.ItemListBean>?=null
 
     override fun attachLayoutRes() = R.layout.ac_home_main
 
@@ -49,9 +46,12 @@ class HomeMainActivity : BaseActivity(), HomeMainContract.IHomeViewNavgitionView
         btn_button.text="获取数据"
 
 
-        val recyclerview_categroy=nav_view.findViewById<RecyclerView>(R.id.design_navigation_view)
-        recyclerview_categroy.layoutManager=LinearLayoutManager(mContext)
-        recyclerview_categroy.adapter=categroyNavAdapter
+//        val recyclerview_categroy=nav_view.findViewById<RecyclerView>(R.id.design_navigation_view)
+        recycler_view_nav.layoutManager=LinearLayoutManager(mContext)
+        recycler_view_nav.adapter=categroyNavAdapter
+
+
+        homePresenter!!.getData()
 
     }
 
@@ -80,7 +80,7 @@ class HomeMainActivity : BaseActivity(), HomeMainContract.IHomeViewNavgitionView
             }
 
             btn_button -> {
-                homePresenter!!.getData()
+//                homePresenter!!.getData()
             }
         }
     }

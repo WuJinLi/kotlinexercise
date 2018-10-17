@@ -16,30 +16,31 @@ import com.wjl.kotlinexercise.openeye.model.CategroyModel
  * @date:2018/10/16
  * @desc:
  */
-class CategroyNavAdapter(context: Context) : RecyclerView.Adapter<CategroyNavAdapter.CategroyViewHolder>() {
+class CategroyNavAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
 
     var mContext: Context? = null
     var mCategroyList: MutableList<CategroyModel.ItemListBean> = ArrayList()
 
-    val itemHeader:Int=0x1
-    val itemHeaderLine:Int=0x2
+    val itemHeader: Int = 0x1
+    val itemHeaderLine: Int = 0x2
 
     init {
         mContext = context
     }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): CategroyViewHolder {
-        val itemview = LayoutInflater.from(mContext).inflate(R.layout.ly_categroy, p0,false)
+        val itemview = LayoutInflater.from(mContext).inflate(R.layout.ly_categroy, p0, false)
         return CategroyViewHolder(itemview)
     }
 
     override fun getItemCount() = mCategroyList.size
 
-    override fun onBindViewHolder(p0: CategroyViewHolder, p1: Int) {
+    override fun onBindViewHolder(p0: RecyclerView.ViewHolder, p1: Int) {
         var itemlistbean = mCategroyList[p1]
 
 
-        Glide.with(mContext!!).load(itemlistbean.data!!.icon).into(p0.img_category_icon)
+        Glide.with(mContext!!).load(itemlistbean.data!!.icon).into((p0 as CategroyViewHolder).img_category_icon)
         p0.tv_category_name.text = itemlistbean.data!!.title
         p0.tv_category_des.text = itemlistbean.data!!.description
     }

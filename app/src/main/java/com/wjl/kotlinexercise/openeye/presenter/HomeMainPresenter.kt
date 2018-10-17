@@ -67,6 +67,12 @@ class HomeMainPresenter(context: Context, view: HomeMainContract.IHomeViewNavgit
                             showNavigitionCategroy(categroy)
                         }
                     }
+                },
+                {
+                    e:Throwable ->
+                    mView!!.apply {
+                        loadDataFailed()
+                    }
                 }
         )
     }
