@@ -1,5 +1,6 @@
 package com.wjl.kotlinexercise.openeye.ui
 
+import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
@@ -18,6 +19,7 @@ import kotlinx.android.synthetic.main.ac_welcome.*
  */
 class WelcomeActivity : BaseActivity() {
 
+
     override fun attachLayoutRes(): Int = R.layout.ac_welcome
 
     val handle: Handler = object : Handler(Looper.getMainLooper()) {
@@ -26,7 +28,7 @@ class WelcomeActivity : BaseActivity() {
 
             when (msg?.what) {
                 1 -> {
-                    startActivity(intent.setClass(this@WelcomeActivity, HomeMainActivity::class.java))
+                    startActivity(Intent(this@WelcomeActivity, HomeMainActivity::class.java))
                     this@WelcomeActivity?.finish()
                 }
             }
@@ -38,6 +40,14 @@ class WelcomeActivity : BaseActivity() {
     }
 
     override fun initViews() {
+
+    }
+
+    override fun initListener() {
+
+    }
+
+    override fun loadData() {
         //获取每日推荐图片地址，如果没有缓存就加载默认图片
         var imagePath = getSp().getString(SpTag.splashNextPageUrl, "")
 
@@ -55,9 +65,5 @@ class WelcomeActivity : BaseActivity() {
         iv_welcome_bg.startAnimation(scaleAnimation)
 
         handle?.sendEmptyMessageDelayed(1, 3500)
-    }
-
-    override fun initListener() {
-
     }
 }

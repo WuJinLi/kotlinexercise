@@ -17,6 +17,9 @@ import kotlinx.android.synthetic.main.ac_main_page.*
  * desc  :
  */
 class MainPageActivity : BaseActivity() {
+    override fun loadData() {
+
+    }
 
     private val FRAGMENT_HOME = 0x01
     private val FRAGMENT_KNOWLEDGE = 0x02

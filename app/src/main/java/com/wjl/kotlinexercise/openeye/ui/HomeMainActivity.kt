@@ -60,6 +60,10 @@ class HomeMainActivity : BaseActivity(), HomeMainContract.IHomeViewNavgitionView
         btn_jump.setOnClickListener(this)
     }
 
+    override fun loadData() {
+//        homePresenter!!.getData()
+    }
+
 
     override fun onClick(p0: View?) {
 //        when (p0.id) {

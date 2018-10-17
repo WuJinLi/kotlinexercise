@@ -21,6 +21,7 @@ abstract class BaseActivity : AppCompatActivity() {
         initData()
         initViews()
         initListener()
+        loadData()
     }
 
 
@@ -40,6 +41,12 @@ abstract class BaseActivity : AppCompatActivity() {
      * 初始化布局文件，控件的设置等操作
      */
     protected abstract fun initViews(): Unit
+
+
+    /**
+     * 加载页面数据
+     */
+    protected abstract fun loadData()
 
 
     /**

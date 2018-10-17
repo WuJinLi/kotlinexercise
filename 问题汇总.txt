@@ -1,0 +1,5 @@
+问题汇总：
+
+
+1.在进行页面跳转时，使用Intent进行初始化，携带数据，不要用kotlin提供的intent,在已经跳转的页面获取上一页面传递数据时
+  可使用kotlin提供的intent（自身实现了getIntent()/setIntent()）
