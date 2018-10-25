@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.Gravity
+import android.view.View
 import android.widget.Toast
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -29,6 +30,14 @@ fun <T> Observable<T>.applySchedulers(): Observable<T> {
     return subscribeOn(Schedulers.io()).
             unsubscribeOn(Schedulers.io()).
             observeOn(AndroidSchedulers.mainThread())
+}
+
+fun View.Gone() {
+    this.visibility = View.GONE
+}
+
+fun View.Visible() {
+    this.visibility = View.VISIBLE
 }
 
 

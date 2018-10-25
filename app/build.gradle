@@ -49,4 +49,6 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     implementation 'cn.bingoogolapple:bga-banner:2.2.4@aar'
     implementation 'com.orhanobut:logger:1.15'
+    // BRVAH
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
 }

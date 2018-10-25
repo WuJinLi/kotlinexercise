@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_hor_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/default_padding"
+    >
+
+  <ImageView
+      android:id="@+id/img_follow_card_img"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/horizontalScrollCard_height"
+      android:scaleType="centerCrop"
+      />
+
+  <ImageView
+      android:id="@+id/img_daily_label"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/default_margin"
+      android:layout_marginTop="@dimen/default_margin"
+      android:src="@drawable/daily_label"
+      />
+
+  <TextView
+      android:id="@+id/tv_follow_time_length"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignBottom="@+id/img_follow_card_img"
+      android:layout_alignParentEnd="true"
+      android:layout_marginBottom="@dimen/margin_5dp"
+      android:layout_marginEnd="@dimen/margin_5dp"
+      android:background="@drawable/video_length_text_back"
+      android:text="07:46"
+      android:textColor="@color/white"
+      android:textSize="14sp"
+      />
+
+  <ImageView
+      android:id="@+id/img_follow_card_user_icon"
+      android:layout_width="@dimen/img_category_icon_w_h"
+      android:layout_height="@dimen/img_category_icon_w_h"
+      android:layout_below="@+id/img_follow_card_img"
+      android:layout_marginEnd="@dimen/default_margin"
+      android:layout_marginTop="@dimen/default_margin"
+      android:scaleType="centerCrop"
+      />
+
+  <RelativeLayout
+      android:id="@+id/rl_follow_author_container"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/img_category_icon_w_h"
+      android:layout_below="@+id/img_follow_card_img"
+      android:layout_marginTop="@dimen/default_margin"
+      android:layout_toEndOf="@+id/img_follow_card_user_icon"
+      android:orientation="vertical"
+      >
+
+    <TextView
+        android:id="@+id/tv_follow_card_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/margin_3dp"
+        android:maxLines="1"
+        android:text="这里是视频标题"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/tv_follow_card_des"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/margin_3dp"
+        android:maxLines="1"
+        android:text="这里是作者名和视频分类"
+        android:textColor="@color/gray"
+        android:textSize="14sp"
+        />
+  </RelativeLayout>
+
+  <TextView
+      android:id="@+id/tv_bottom_divider_10"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/default_margin"
+      android:layout_below="@+id/rl_follow_author_container"
+      />
+
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/divider_h"
+      android:layout_below="@+id/tv_bottom_divider_10"
+      android:background="@color/gray_e5"
+      />
+</RelativeLayout>

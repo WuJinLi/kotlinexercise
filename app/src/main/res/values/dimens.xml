@@ -5,4 +5,39 @@
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
+
+
+
+    <dimen name="horizontalScrollCard_height">200dp</dimen>
+    <dimen name="default_padding">10dp</dimen>
+    <dimen name="default_margin">10dp</dimen>
+    <dimen name="margin_5dp">5dp</dimen>
+    <dimen name="margin_3dp">3dp</dimen>
+    <dimen name="margin_20dp">20dp</dimen>
+    <dimen name="padding_20dp">20dp</dimen>
+    <dimen name="default_toolbar_height">48dp</dimen>
+    <dimen name="tv_TextCard_header5_subtitle_size">16sp</dimen>
+    <dimen name="tv_TextCard_header5_size">24sp</dimen>
+    <dimen name="tv_TextCard_header4_size">14sp</dimen>
+    <dimen name="tv_TextCard_header2_size">24sp</dimen>
+    <dimen name="tv_TextCard_footer2_size">14sp</dimen>
+    <dimen name="tv_TextCard_footer1_size">12sp</dimen>
+    <dimen name="tv_TextCard_h">48dp</dimen>
+    <dimen name="tv_user_des_h">60dp</dimen>
+    <dimen name="progress_loading_w_h">60dp</dimen>
+    <dimen name="userIcon_w_h">60dp</dimen>
+    <dimen name="img_category_icon_w_h">50dp</dimen>
+    <dimen name="img_videoSmallCard_w">140dp</dimen>
+    <dimen name="img_videoSmallCard_h">80dp</dimen>
+    <dimen name="squareCardCollection_h">180dp</dimen>
+    <dimen name="divider_h">0.01dp</dimen>
+    <dimen name="dp_10">10dp</dimen>
+    <dimen name="dp_12">12dp</dimen>
+    <dimen name="dp_6">6dp</dimen>
+    <dimen name="dp_4">4dp</dimen>
+    <dimen name="dp_2">2dp</dimen>
+    <dimen name="dp_1">1dp</dimen>
+    <dimen name="dp_58">58dp</dimen>
+    <dimen name="dp_20">20dp</dimen>
 </resources>

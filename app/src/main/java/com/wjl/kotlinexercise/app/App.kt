@@ -9,8 +9,13 @@ import com.wjl.kotlinexercise.http.LogUtil
  * desc  :
  */
 class App : Application() {
+
+    companion object {
+        lateinit var application: App
+    }
     override fun onCreate() {
         super.onCreate()
+        application = this
         LogUtil.init(true)
     }
 }
