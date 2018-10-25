@@ -18,7 +18,7 @@ import com.wjl.kotlinexercise.utils.UIUtil
 /**
  * @author: wujinli
  * @date:2018/10/25
- * @desc:
+ * @desc: 横向横向适配器
  */
 class HorRvAdapter : RecyclerView.Adapter<HorRvAdapter.Holder> {
 
@@ -26,19 +26,13 @@ class HorRvAdapter : RecyclerView.Adapter<HorRvAdapter.Holder> {
     private var list: List<Item?>? = null
     private var inflater: LayoutInflater
 
-    constructor(
-            context: Context,
-            list: List<Item?>?
-    ) : super() {
+    constructor(context: Context, list: List<Item?>?) : super() {
         this.context = context
         this.list = list
         this.inflater = LayoutInflater.from(context)
     }
 
-    override fun onCreateViewHolder(
-            parent: ViewGroup,
-            viewType: Int
-    ): Holder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         return Holder(
                 inflater.inflate(R.layout.item_home_followcard, parent, false)
         )
@@ -51,10 +45,7 @@ class HorRvAdapter : RecyclerView.Adapter<HorRvAdapter.Holder> {
         return list!!.size
     }
 
-    override fun onBindViewHolder(
-            holder: Holder,
-            position: Int
-    ) {
+    override fun onBindViewHolder(holder: Holder, position: Int) {
         val item = list?.get(position) ?: return
         val type = item.type
         if (itemCount > 1) {
@@ -63,6 +54,9 @@ class HorRvAdapter : RecyclerView.Adapter<HorRvAdapter.Holder> {
             holder.rl_hor_root.layoutParams.width = RecyclerView.LayoutParams.MATCH_PARENT
         }
         holder.rl_hor_root.setPadding(0, UIUtil.dp2px(10), 0, UIUtil.dp2px(10))
+
+
+        /***************************item的布局内容显示*******************************/
         when (type) {
             "banner2" -> {
                 holder.tv_follow_time_length.Gone()
@@ -129,15 +123,13 @@ class HorRvAdapter : RecyclerView.Adapter<HorRvAdapter.Holder> {
     }
 
     class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var rl_hor_root: RelativeLayout = itemView.findViewById(R.id.rl_hor_root)
-        var img_follow_card_img: ImageView = itemView.findViewById(R.id.img_follow_card_img)
-        var img_daily_label: ImageView = itemView.findViewById(R.id.img_daily_label)
-        var tv_follow_time_length: TextView = itemView.findViewById(R.id.tv_follow_time_length)
-        var img_follow_card_user_icon: ImageView =
-                itemView.findViewById(R.id.img_follow_card_user_icon)
-        var tv_follow_card_title: TextView = itemView.findViewById(R.id.tv_follow_card_title)
-        var tv_follow_card_des: TextView = itemView.findViewById(R.id.tv_follow_card_des)
-        var rl_follow_author_container =
-                itemView.findViewById<RelativeLayout>(R.id.rl_follow_author_container)
+        var rl_hor_root = itemView.findViewById<RelativeLayout>(R.id.rl_hor_root)
+        var img_follow_card_img = itemView.findViewById<ImageView>(R.id.img_follow_card_img)
+        var img_daily_label = itemView.findViewById<ImageView>(R.id.img_daily_label)
+        var tv_follow_time_length = itemView.findViewById<TextView>(R.id.tv_follow_time_length)
+        var img_follow_card_user_icon = itemView.findViewById<ImageView>(R.id.img_follow_card_user_icon)
+        var tv_follow_card_title = itemView.findViewById<TextView>(R.id.tv_follow_card_title)
+        var tv_follow_card_des = itemView.findViewById<TextView>(R.id.tv_follow_card_des)
+        var rl_follow_author_container = itemView.findViewById<RelativeLayout>(R.id.rl_follow_author_container)
     }
 }

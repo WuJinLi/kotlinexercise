@@ -11,7 +11,7 @@ import com.wjl.kotlinexercise.openeye.model.HomeDataEntity
 /**
  * @author: wujinli
  * @date:2018/10/25
- * @desc: 首页adapter
+ * @desc: 首页adapter，实现recyclerview多布局，需继承BaseMultiItemQuickAdapter
  */
 class HomeDataAdapter(context: Context, data: List<HomeDataEntity>) : BaseMultiItemQuickAdapter<HomeDataEntity, BaseViewHolder>(data) {
 

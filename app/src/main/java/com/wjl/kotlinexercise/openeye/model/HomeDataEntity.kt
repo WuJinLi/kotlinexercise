@@ -6,7 +6,7 @@ import com.wjl.kotlinexercise.openeye.entity.Item
 /**
  * @author: wujinli
  * @date:2018/10/25
- * @desc:
+ * @desc: 主页实体类型 为实现多布局则实体类需集成MultiItemEntity
  */
 class HomeDataEntity : MultiItemEntity {
 

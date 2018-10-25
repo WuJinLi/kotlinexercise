@@ -1,8 +1,6 @@
 package com.wjl.kotlinexercise
 
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.view.Gravity
 import android.view.View
 import android.widget.Toast
@@ -15,23 +13,21 @@ import io.reactivex.schedulers.Schedulers
  * time  : 2018/9/7
  * desc  :
  */
-fun Context.showToast(message: String) : Toast {
-    var toast : Toast = Toast.makeText(this,message,Toast.LENGTH_SHORT)
-    toast.setGravity(Gravity.CENTER,0,0)
+fun Context.showToast(message: String): Toast {
+    var toast: Toast = Toast.makeText(this, message, Toast.LENGTH_SHORT)
+    toast.setGravity(Gravity.CENTER, 0, 0)
     toast.show()
     return toast
 }
 
-inline fun <reified T: Activity> Activity.newIntent() {
-    val intent = Intent(this, T::class.java)
-    startActivity(intent)
-}
+
+/*************************rxjava，rxandroid的线程调度********************************/
 fun <T> Observable<T>.applySchedulers(): Observable<T> {
-    return subscribeOn(Schedulers.io()).
-            unsubscribeOn(Schedulers.io()).
-            observeOn(AndroidSchedulers.mainThread())
+    return subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
 }
 
+
+/********************view的显示和隐藏**************************/
 fun View.Gone() {
     this.visibility = View.GONE
 }
