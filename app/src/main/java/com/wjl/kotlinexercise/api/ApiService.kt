@@ -2,6 +2,7 @@ package com.wjl.kotlinexercise.api
 
 import com.wjl.kotlinexercise.openeye.model.AllCategroyModel
 import com.wjl.kotlinexercise.openeye.model.CategroyModel
+import com.wjl.kotlinexercise.openeye.model.HomeDataEntity
 import com.wjl.kotlinexercise.test.HeWeather6Model
 import io.reactivex.Observable
 import retrofit2.http.*
@@ -29,4 +30,8 @@ interface ApiService {
      */
     @GET()
     fun getCategroyData(@Url url:String):Observable<CategroyModel>
+
+
+    @GET()
+    fun getCommonListData(@Url url:String):Observable<HomeDataEntity>
 }

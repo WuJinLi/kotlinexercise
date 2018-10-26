@@ -1,5 +1,6 @@
 package com.wjl.kotlinexercise.base
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -12,9 +13,11 @@ import android.view.ViewGroup
  * desc  :
  */
 abstract class BaseFragment : Fragment() {
+    protected var mContext:Context?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mContext=context
     }
 
 
