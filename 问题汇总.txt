@@ -1,5 +1,17 @@
 问题汇总：
 
 2018/10/17
-1.在进行页面跳转时，使用Intent进行初始化，携带数据，不要用kotlin提供的intent,在已经跳转的页面获取上一页面传递数据时
-  可使用kotlin提供的intent（自身实现了getIntent()/setIntent()）
+    1.在进行页面跳转时，使用Intent进行初始化，携带数据，不要用kotlin提供的intent,在已经跳转的页面获取上一页面传递数据时
+      可使用kotlin提供的intent（自身实现了getIntent()/setIntent()）
+2018/10/26
+    2.针对但页面布局显示显示复杂数据，可以采用listview/Recyclerview多布局显示来进行页面布局显示
+      就项目而言，先采用recyclerview来进行多布局展示业务数据；
+      在使用recyclerview时，再用了开源框架万能recyclerview适配器，进行业务数据展示（多布局，非多布局）
+      具体使用方法：https://www.jianshu.com/p/1e20f301272e
+
+      a)在项目添加项目依赖   compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
+      b)使用适配器：BaseQuickAdapter<Model, BaseViewHolder>/BaseMultiItemQuickAdapter<Model, BaseViewHolder>
+        BaseQuickAdapter:正常业务数据展示适配器，不涉及到复杂的布局
+        BaseMultiItemQuickAdapter：多布局展示的适配器，在使用时，数据的实体类需要实现MultiItemEntity
+      c)适配器实现了数据加载动画，添加头布局，底部局，空布局，item点击事件（包括item自身点击事件，子控件点击事件），
+        上拉加载更多，下拉刷新（个人觉得使用swipRefreshLayout）等方便的方法

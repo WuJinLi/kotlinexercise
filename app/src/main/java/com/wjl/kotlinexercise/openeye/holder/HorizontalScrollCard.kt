@@ -14,8 +14,10 @@ import com.wjl.kotlinexercise.widget.HorRvDecoration
 /**
  * @author: wujinli
  * @date:2018/10/25
- * @desc: 横向recyclerview布局显示 通过BaseViewHolder，HomeDataEntity进行指定数据的展示
+ * @desc: 介于多布局显示，抽离单独类进行指定布局数据展示问题，针对父类已经提供相关holder和数据实体
+ *        横向recyclerview布局显示 通过BaseViewHolder，HomeDataEntity进行指定数据的展示
  *        当前展示数据的意图就是通过holder获取当前父布局某一item，进行多布局中某一种布局数据的展示
+ *        这种显示可以是列表，多布局，viewpager等等各种布局显示
  */
 class HorizontalScrollCard {
 
