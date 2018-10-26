@@ -2,14 +2,15 @@ package com.wjl.kotlinexercise.http
 
 import android.content.Context
 import android.util.Log
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import java.io.File
 import okhttp3.Cache
-import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.wjl.kotlinexercise.Constant
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.Retrofit
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.OkHttpClient
+//import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import java.util.concurrent.TimeUnit
 
 /**
@@ -53,6 +54,7 @@ class RetrofitClient private constructor(context: Context) {
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+//                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .baseUrl(url)
                 .build()
 

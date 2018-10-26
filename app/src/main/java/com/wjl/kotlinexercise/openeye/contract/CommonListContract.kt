@@ -1,5 +1,6 @@
 package com.wjl.kotlinexercise.openeye.contract
 
+import com.wjl.kotlinexercise.openeye.entity.HomeDataBean
 import com.wjl.kotlinexercise.openeye.model.HomeDataEntity
 
 /**
@@ -10,7 +11,7 @@ import com.wjl.kotlinexercise.openeye.model.HomeDataEntity
 class CommonListContract {
 
     interface ICommonListView {
-        fun loadDataSuccessful(homeDataEnity: HomeDataEntity)
+        fun loadDataSuccessful(homeDataBean: HomeDataBean)
         fun loadDataFailed()
     }
 

@@ -59,7 +59,7 @@ class HomeMainPresenter(context: Context, view: HomeMainContract.IHomeViewNavgit
 //        )
 
 
-        RetrofitClient.getInstance(mContext!!).create(ApiService::class.java)!!.getCategroyData(Constant.categoryUrl)!!.applySchedulers().subscribe(
+        RetrofitClient.getInstance(mContext!!).create(ApiService::class.java)!!.getCategroyData(Constant.CATEGORY_URL)!!.applySchedulers().subscribe(
                 {
                     categroy: CategroyModel? ->
                     if (categroy!=null){

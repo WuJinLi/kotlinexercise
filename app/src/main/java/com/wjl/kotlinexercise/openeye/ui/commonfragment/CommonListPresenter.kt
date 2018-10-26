@@ -5,6 +5,7 @@ import com.wjl.kotlinexercise.api.ApiService
 import com.wjl.kotlinexercise.applySchedulers
 import com.wjl.kotlinexercise.http.RetrofitClient
 import com.wjl.kotlinexercise.openeye.contract.CommonListContract
+import com.wjl.kotlinexercise.openeye.entity.HomeDataBean
 import com.wjl.kotlinexercise.openeye.model.HomeDataEntity
 
 /**
@@ -19,8 +20,8 @@ class CommonListPresenter : CommonListContract.IPresenter {
     private var apiService: ApiService
     private var mView: CommonListContract.ICommonListView
 
-    constructor(context: Context, mView: CommonListContract.ICommonListView) {
-        this.context = context
+    constructor(context: Context?, mView: CommonListContract.ICommonListView) {
+        this.context = context!!
         this.mView = mView
         apiService = RetrofitClient.getInstance(context).create(ApiService::class.java)!!
     }
@@ -28,9 +29,9 @@ class CommonListPresenter : CommonListContract.IPresenter {
 
     override fun loadData(url: String) {
         apiService.getCommonListData(url).applySchedulers().subscribe(
-                { homeDataEnity: HomeDataEntity? ->
+                { homeDataBean: HomeDataBean? ->
                     mView.apply {
-                        loadDataSuccessful(homeDataEnity!!)
+                        loadDataSuccessful(homeDataBean!!)
                     }
                 },
                 { t: Throwable? ->

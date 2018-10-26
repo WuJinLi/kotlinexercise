@@ -1,5 +1,6 @@
 package com.wjl.kotlinexercise.api
 
+import com.wjl.kotlinexercise.openeye.entity.HomeDataBean
 import com.wjl.kotlinexercise.openeye.model.AllCategroyModel
 import com.wjl.kotlinexercise.openeye.model.CategroyModel
 import com.wjl.kotlinexercise.openeye.model.HomeDataEntity
@@ -33,5 +34,5 @@ interface ApiService {
 
 
     @GET()
-    fun getCommonListData(@Url url:String):Observable<HomeDataEntity>
+    fun getCommonListData(@Url url:String):Observable<HomeDataBean>
 }
