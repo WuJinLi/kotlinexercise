@@ -32,4 +32,6 @@ object Constant {
 
     //发现
     const val DISCOVERY_URL = "http://baobab.kaiyanapp.com/api/v5/index/tab/discovery"
+
+    const val API_PREFIX_URL = "http://baobab.kaiyanapp.com/api/v5/index/tab/"
 }

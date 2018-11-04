@@ -71,6 +71,7 @@ class CommonListFragment : Fragment(), CommonListContract.ICommonListView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        swipe_refresh!!.isRefreshing=false
         recycler_data_list_home?.layoutManager = LinearLayoutManager(requireContext())
 //        adapter?.setEmptyView(R.layout.ly_empty)
         recycler_data_list_home?.adapter = adapter
@@ -97,7 +98,7 @@ class CommonListFragment : Fragment(), CommonListContract.ICommonListView {
         if (homeDataBean != null) {
             //返回数据不为空
             nextPageUrl = homeDataBean.nextPageUrl
-
+            dataSource.clear()
             if (homeDataBean.itemList != null) {
                 for (item: Item? in homeDataBean.itemList) {
                     when (item?.type) {
@@ -130,7 +131,7 @@ class CommonListFragment : Fragment(), CommonListContract.ICommonListView {
     fun setUrl(url: String) {
         this.url = url
         if (commonListPresenter == null) {
-            commonListPresenter = CommonListPresenter(context, this)
+            commonListPresenter = CommonListPresenter(requireContext(), this)
         }
         commonListPresenter!!.loadData(url)
     }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.wjl.kotlinexercise.R
@@ -43,6 +44,13 @@ class CategroyNavAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.V
         Glide.with(mContext!!).load(itemlistbean.data!!.icon).into((p0 as CategroyViewHolder).img_category_icon)
         p0.tv_category_name.text = itemlistbean.data!!.title
         p0.tv_category_des.text = itemlistbean.data!!.description
+
+        p0.rl_item_root.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(p0: View?) {
+                itemClicListener?.onClick(p0!!, p1)
+            }
+
+        })
     }
 
 
@@ -59,6 +67,7 @@ class CategroyNavAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.V
         val img_category_icon = itemview.findViewById<ImageView>(R.id.img_category_icon)
         val tv_category_name = itemview.findViewById<TextView>(R.id.tv_category_name)
         val tv_category_des = itemview.findViewById<TextView>(R.id.tv_category_des)
+        val rl_item_root = itemview.findViewById<RelativeLayout>(R.id.rl_item_root)
     }
 
 
@@ -69,5 +78,18 @@ class CategroyNavAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.V
 
         mCategroyList = categroyList as MutableList<CategroyModel.ItemListBean>
         notifyDataSetChanged()
+    }
+
+    fun getCategroyList() = mCategroyList
+
+
+    interface ItemClicListener {
+        fun onClick(view: View, position: Int)
+    }
+
+    var itemClicListener: ItemClicListener? = null
+
+    fun setOnItemClickListener(itemClicListener: ItemClicListener) {
+        this.itemClicListener = itemClicListener
     }
 }
